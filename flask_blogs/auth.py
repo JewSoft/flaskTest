@@ -53,6 +53,7 @@ def login():
             session.clear()
             session['user_id'] = 'user_session'
             # 这个url_for里的函数名前要加上蓝图的名称，如果使用了蓝图的话。
+            # auth_abc.a的意思是：名称为auth_abc的蓝图下的名称为a的函数
             return redirect(url_for('auth_abc.a'))
 
         return f'密码不正确。用户名：{username}，密码hash：{generate_password_hash(password)}'
