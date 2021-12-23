@@ -13,6 +13,7 @@ import os
 from flask import Flask
 import logging
 from logging.handlers import RotatingFileHandler
+
 from config import config_map
 
 
@@ -49,12 +50,16 @@ def create_app(config_name):
 
     # 注册蓝图
     from flask_blogs import auth
+    from flask_blogs import blog
     app.register_blueprint(auth.bp)
+    app.register_blueprint(blog.bp)
+    # 由于blog.bp没有设置usrl_prefix,所以要设置一个endpoint
+    app.add_url_rule('/', endpoint='index')
+
     return app
 
 
 def setup_log(config_name):
-
     logging.basicConfig(level=config_map[config_name].LOG_LEVEL)
     file_log_handler = RotatingFileHandler(
         filename='logs/flask.log',

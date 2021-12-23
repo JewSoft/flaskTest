@@ -53,15 +53,23 @@ def login():
         # 对密码进行验证，前面是hash值，后面是真实值
         # 对用户密码进行保存的时候应保存为hash值
         if check_password_hash(generate_password_hash('1'), password):
+            # 登陆成功后进行session处理
             session.clear()
-            session['user_id'] = 'user_session'
+            session['user_id'] = 10
+            g.user = 10
             # 这个url_for里的函数名前要加上蓝图的名称，如果使用了蓝图的话。
             # auth_abc.a的意思是：名称为auth_abc的蓝图下的名称为a的函数
-            return redirect(url_for('auth_abc.a'))
+            # return redirect(url_for('auth_abc.a'))
+            return redirect(url_for('blog.index'))
+        else:
+            g.user = None
 
         return f'密码不正确。用户名：{username}，密码hash：{generate_password_hash(password)}'
 
 
 @bp.route('/')
 def a():
-    return '这是登陆后的主页'
+    # 校验session
+    if 10 == session['user_id']:
+        return '校验成功'
+    return '校验不存在'
