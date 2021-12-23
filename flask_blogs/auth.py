@@ -46,7 +46,10 @@ def login():
         # 在蓝图中使用log，需要用以下语句。记得导包
         # 其实current_app的意思就是获取当前正在执行的flask实例
         # 如果要对当前的flask实例进行操作，也可用这个方法调取
-        current_app.logger.debug('test')
+        current_app.logger.debug('这是debug模式')
+        current_app.logger.error(f'回传的用户名及密码：{username},{password}')
+        current_app.logger.info('这是info模式')
+        current_app.logger.warning('这是warning模式')
         # 对密码进行验证，前面是hash值，后面是真实值
         # 对用户密码进行保存的时候应保存为hash值
         if check_password_hash(generate_password_hash('1'), password):
