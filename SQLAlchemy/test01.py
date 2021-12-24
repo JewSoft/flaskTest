@@ -29,6 +29,12 @@ def update():
     session.close()
 
 
+def delete():
+    session.query(UsersTest).filter_by(id=3).delete()
+    session.commit()
+    session.close()
+
+
 def sql():
     result = session.query(UsersTest).filter()
     print(result)
@@ -38,7 +44,33 @@ def sql():
     session.close()
 
 
+def add_all():
+    session.add_all([
+        UsersTest(name='user001', age=21, phone='133'),
+        UsersTest(name='user002', age=20, phone='135'),
+        UsersTest(name='user003', age=25, phone='139'),
+    ])
+    session.commit()
+    session.close()
+
+
+def select_all():
+    result = session.query(UsersTest).all()
+    print(result[1].name)
+    result01 = session.query(UsersTest).filter(UsersTest.name == 'USER001').all()
+    result02 = session.query(UsersTest).filter(UsersTest.age == 23, UsersTest.name == 'a1').all()
+    result03 = session.query(UsersTest).filter(UsersTest.age == 23).first()
+    print(result01[0])
+    print(result02[0])
+    print(result03)
+    session.commit()
+    session.close()
+
+
 if __name__ == '__main__':
     # sql()
     # update()
-    insert()
+    # insert()
+    # delete()
+    # add_all()
+    select_all()
