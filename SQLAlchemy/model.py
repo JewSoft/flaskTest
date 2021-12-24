@@ -13,7 +13,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 engine = create_engine(
-    "mysql+pymysql://*:*@127.0.0.1:3306/djangotest?charset=utf8",
+    "mysql+pymysql://connUser:123a123@127.0.0.1:3306/djangotest?charset=utf8",
     max_overflow=0,
     pool_size=5,
     pool_timeout=30,

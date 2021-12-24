@@ -39,4 +39,6 @@ def sql():
 
 
 if __name__ == '__main__':
-    sql()
+    # sql()
+    # update()
+    insert()
